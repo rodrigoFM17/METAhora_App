@@ -5,6 +5,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.practica1.addGoal.presentation.AddGoalScreen
+import com.example.practica1.addGoal.presentation.AddGoalViewModel
 import com.example.practica1.home.presentation.HomeScreen
 import com.example.practica1.home.presentation.HomeViewModel
 import com.example.practica1.login.presentation.LoginScreen
@@ -29,7 +31,15 @@ fun NavigationWrapper () {
             )
         }
         composable<Register> { RegisterScreen(RegisterViewModel()) }
-        composable<Home> { HomeScreen( HomeViewModel(userStorage) ) }
+        composable<Home> {
+            HomeScreen(
+                HomeViewModel(userStorage),
+                { navController.navigate(AddGoal)}
+            )
+        }
+        composable<AddGoal> {
+            AddGoalScreen( AddGoalViewModel( { navController.navigate(Home) }) )
+        }
     }
 
 }
