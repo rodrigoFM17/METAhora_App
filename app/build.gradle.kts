@@ -61,6 +61,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)    //Navegation
     implementation(libs.kotlinx.serialization.json)     //Navegation
 
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

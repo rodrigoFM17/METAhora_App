@@ -1,15 +1,21 @@
 package com.example.practica1.login.data.repository
 
+import android.util.Log
 import com.example.practica1.core.network.RetrofitHelper
+import com.example.practica1.login.data.model.LoginResponse
 import com.example.practica1.login.data.model.LoginUserRequest
 import com.example.practica1.login.data.model.UserDTO
+import com.example.practica1.model.APIResponse
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class LoginRepository {
     private val loginService = RetrofitHelper.loginService
 
-    suspend fun login (request : LoginUserRequest): Result<UserDTO> {
+    suspend fun login (request : LoginUserRequest): Result<APIResponse<UserDTO>> {
         return try {
             val response = loginService.loginUser(request)
+
             if(response.isSuccessful){
                 Result.success(response.body()!!)
             } else {
