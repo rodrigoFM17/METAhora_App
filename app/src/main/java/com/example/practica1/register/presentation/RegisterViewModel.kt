@@ -9,7 +9,7 @@ import com.example.practica1.register.data.model.RegisterUserRequest
 import com.example.practica1.register.domain.RegisterUseCase
 import kotlinx.coroutines.launch
 
-class RegisterViewModel: ViewModel() {
+class RegisterViewModel(private val navigateToLogin: () -> Unit): ViewModel() {
 
     private val registerUseCase = RegisterUseCase()
     private var _nickname = MutableLiveData<String>()
@@ -36,6 +36,9 @@ class RegisterViewModel: ViewModel() {
         viewModelScope.launch {
             Log.d("API", email.value + nickname.value + password.value )
             val result = registerUseCase(userToRegister)
+            if(result.isSuccess){
+                navigateToLogin()
+            }
             Log.d("API", result.toString())
             Log.d("API", result.isSuccess.toString())
         }

@@ -28,11 +28,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import com.example.practica1.addGoal.data.model.AddGoalRequest
 import com.example.practica1.login.data.model.LoginUserRequest
+import com.example.practica1.storage.UserStorage
 import com.example.state.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddGoalScreen ( addGoalViewModel: AddGoalViewModel) {
+fun AddGoalScreen ( addGoalViewModel: AddGoalViewModel, userStorage: UserStorage) {
 
     val title by addGoalViewModel.title.observeAsState("")
     val description by addGoalViewModel.description.observeAsState("")
@@ -97,8 +98,11 @@ fun AddGoalScreen ( addGoalViewModel: AddGoalViewModel) {
             onClick = {
 
                 addGoalViewModel.viewModelScope.launch {
-                    val request = AddGoalRequest(title, description)
-                    addGoalViewModel.onClick(request)
+                    val userId = userStorage.getId()
+                    if (userId != null) {
+                        val request = AddGoalRequest(userId , title, description)
+                        addGoalViewModel.onClick(request)
+                    }
                 }
             },
             modifier = Modifier

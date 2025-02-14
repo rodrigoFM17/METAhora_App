@@ -6,9 +6,13 @@ import com.example.practica1.model.APIResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.Path
 
 interface HomeService {
     @GET("users/{userId}/goals")
     suspend fun getAllGoals(@Path("userId") userId: String): Response<APIResponse<GoalDTO>>
+
+    @PATCH("goals/{goalId}")
+    suspend fun completeGoal(@Path("goalId") goalId: String): Response<APIResponse<GoalDTO>>
 }

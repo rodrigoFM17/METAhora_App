@@ -13,15 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            NavigationWrapper()
+            NavigationWrapper(this)
         }
     }
-}
-
-@Preview (
-    showBackground = true
-)
-@Composable
-fun Preview ()  {
-    NavigationWrapper()
 }

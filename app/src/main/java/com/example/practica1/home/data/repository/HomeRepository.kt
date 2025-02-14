@@ -21,4 +21,18 @@ class HomeRepository() {
         }
     }
 
+    suspend fun completeGoal(goalId: String): Result<APIResponse<GoalDTO>> {
+        return try {
+            val response = homeService.completeGoal(goalId)
+            if(response.isSuccessful){
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(Exception(response.errorBody()?.string()))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+
 }
