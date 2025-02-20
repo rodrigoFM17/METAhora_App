@@ -63,6 +63,8 @@ dependencies {
 
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.13")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
